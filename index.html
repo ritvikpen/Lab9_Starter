@@ -102,6 +102,82 @@
 
     // Start your code here
     // You may move this JS to another file if you wish
+
+    // let errorBtns = Array.from(document.querySelectorAll('#error-btns > button:not(:last-child)'));
+
+    class CustomError extends Error {
+      constructor(message) {
+        super(message);
+        this.name = 'CustomError';
+      }
+    }
+
+    // Global error handler
+    window.onerror = function(message, source, lineno, colno, error) {
+      console.log('A global error occurred:', message);
+    };
+
+
+    errorBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        let text = btn.textContent.trim();
+        let exampleData = { name: 'John', age: 30, city: 'New York' };
+
+        switch (text) {
+          case 'Console Log':
+            console.log(exampleData);
+            break;
+          case 'Console Error':
+            console.error(exampleData);
+            break;
+          case 'Console Count':
+            console.count(exampleData);
+            break;
+          case 'Console Warn':
+            console.warn(exampleData);
+            break;
+          case 'Console Assert':
+            console.assert(false, 'Assertion failed');
+            break;
+          case 'Console Clear':
+            console.clear();
+            break;
+          case 'Console Dir':
+            console.dir(exampleData);
+            break;
+          case 'Console dirxml':
+            console.dirxml(document.querySelector('body'));
+            break;
+          case 'Console Group Start':
+            console.group('Example Group');
+            console.log(exampleData);
+            //console.groupEnd();
+            break;
+          case 'Console Table':
+            console.table(exampleData);
+            break;
+          case 'Start Timer':
+            console.time('Example Timer');
+            break;
+          case 'End Timer':
+            console.timeEnd('Example Timer');
+            break;
+          case 'Console Trace':
+            console.trace('Trace example');
+            break;
+          case 'Console Group End':
+            //console.group('Example Group');
+            console.groupEnd();
+            console.log(exampleData);
+            break;
+          case 'Trigger a Global Error':
+            // Throw an error that isn't caught by a try/catch block
+            throw new Error('This is a global error');
+            break;
+        }
+      });
+    });
+
   </script>
 </body>
 
